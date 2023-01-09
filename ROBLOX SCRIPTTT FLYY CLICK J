@@ -1,0 +1,19 @@
+local player = game.Players.LocalPlayer
+local character = player.Character
+local humanoid = character:WaitForChild("Humanoid")
+
+local flying = false
+
+game:GetService("UserInputService").InputBegan:Connect(function(inputObject)
+    if inputObject.KeyCode == Enum.KeyCode.J then
+        flying = not flying
+    end
+end)
+
+game:GetService("RunService").RenderStepped:Connect(function()
+    if flying then
+        humanoid:ChangeState(Enum.HumanoidStateType.Flying)
+    else
+        humanoid:ChangeState(Enum.HumanoidStateType.Jumping)
+    end
+end)
